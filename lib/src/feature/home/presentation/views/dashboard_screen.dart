@@ -1,6 +1,8 @@
 import '../../../../core/packages.dart';
 import '../../../chat/model/onboard_model.dart';
+import '../../../orders/model/order_model.dart';
 import '../../../orders/presentation/widget/order_widget.dart';
+import '../../../orders/repository/order_repository.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
@@ -19,6 +21,29 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       title: 'Today\'s Earnings',
       subTitle: '156900',
       isAmount: true,
+    ),
+  ];
+
+  List<OrderModel> orderList = [
+    OrderModel(
+      title: 'Order ID: SL-432738',
+      subTitle: 'Route: Alawusa to Allen Venue',
+      status: OrderStatus.active,
+    ),
+    OrderModel(
+      title: 'Order ID: SL-416357',
+      subTitle: 'Route: Ikeja to Egbeda Route',
+      status: OrderStatus.pending,
+    ),
+    OrderModel(
+      title: 'Order ID: SL-432738',
+      subTitle: 'Route: Ikorodu to Elegbeda',
+      status: OrderStatus.completed,
+    ),
+    OrderModel(
+      title: 'Order ID: SL-122748',
+      subTitle: 'Route: Victoria Island to Epe',
+      status: OrderStatus.cancelled,
     ),
   ];
   @override
@@ -82,7 +107,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         hint: 'Search orders...',
                         prefixIcons: Padding(
                           padding: const EdgeInsets.only(left: 8.0).r,
-                          child: Icon(Icons.search),
+                          child: SvgWidget(AssetConstants.search),
                         ),
                         contentPadding: EdgeInsets.symmetric(
                           vertical: 12,
@@ -92,7 +117,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   ],
                 ),
               ),
-
               20.spacingH,
               Expanded(
                 child: ClipRRect(
@@ -102,13 +126,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   ),
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0).r,
-                    decoration: BoxDecoration(
-                      color: AppColors.whitepurple,
-                      // borderRadius: BorderRadius.only(
-                      //   topLeft: Radius.circular(30).r,
-                      //   topRight: Radius.circular(30).r,
-                      // ),
-                    ),
+                    decoration: BoxDecoration(color: AppColors.whitepurple),
                     child: ListView(
                       children: [
                         20.spacingH,
@@ -177,12 +195,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           children: List.generate(
-                            3,
+                            orderList.length,
                             (index) => Padding(
                               padding: const EdgeInsets.symmetric(
                                 vertical: 5.0,
                               ).r,
-                              child: OrderWidget(),
+                              child: OrderWidget(model: orderList[index]),
                             ),
                           ),
                         ),

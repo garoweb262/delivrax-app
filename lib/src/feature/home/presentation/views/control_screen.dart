@@ -2,6 +2,7 @@ import 'package:delivrax/src/feature/home/presentation/views/dashboard_screen.da
 import 'package:flutter/cupertino.dart';
 
 import '../../../../core/packages.dart';
+import '../../../orders/presentation/views/order_screen.dart';
 
 // import 'discovery_screen.dart';
 // import 'staggard_view.dart';
@@ -40,7 +41,7 @@ class _ControlScreenState extends ConsumerState<ControlScreen> {
         // scrollBehavior: ,
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: [DashboardScreen()],
+        children: [DashboardScreen(), OrderScreen()],
       ),
       bottomNavigationBar: CupertinoTabBar(
         height: 60.h,
